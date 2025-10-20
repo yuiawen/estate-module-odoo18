@@ -157,7 +157,3 @@ estate/
 - Thanks to the Odoo community for conventions and best practices.
 
 ---
-
-## 📄 License
-
-This training module is provided under the MIT License. See `LICENSE` (or update as needed).
