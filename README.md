@@ -58,7 +58,7 @@ estate/
 1. Ensure **Odoo 18** environment is running (Python 3.12).
 2. Clone / copy this module into your custom addons path, e.g.:
    ```bash
-   /mnt/d/Work/Internship/Nashta/odoo18/training/estate
+   /mnt/d/odoo18/training/estate
    ```
 3. Update the addons path in `odoo.conf` if needed.
 4. Restart Odoo and upgrade the module:
