@@ -1,0 +1,75 @@
+<odoo>
+
+  <!-- LIST: editable, dekorasi, tanpa kolom status, tombol sebelum validity -->
+  <record id="estate_property_offer_view_list" model="ir.ui.view">
+    <field name="name">estate.property.offer.view.list</field>
+    <field name="model">estate.property.offer</field>
+    <field name="arch" type="xml">
+      <list string="Offers" editable="bottom"
+            decoration-success="status == 'accepted'"
+            decoration-danger="status == 'refused'">
+        <field name="price"/> <field name="partner_id" optional="show"/>
+        <button name="action_accept" type="object" icon="fa-check" title="Accept"
+                invisible="status != 'new'"/>
+        <button name="action_refuse" type="object" icon="fa-times" title="Refuse"
+                invisible="status != 'new'"/>
+        <field name="validity" optional="show"/> <field name="date_deadline" optional="show"/>
+        <!-- kolom status tidak ditampilkan di list -->
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM: tombol header hilang jika status bukan new -->
+  <record id="estate_property_offer_view_form" model="ir.ui.view">
+    <field name="name">estate.property.offer.view.form</field>
+    <field name="model">estate.property.offer</field>
+    <field name="arch" type="xml">
+      <form string="Offer">
+        <header>
+          <button name="action_accept" type="object" string="Accept" class="oe_highlight"
+                  invisible="status != 'new'"/>
+          <button name="action_refuse" type="object" string="Refuse"
+                  invisible="status != 'new'"/>
+          <field name="status" widget="statusbar" statusbar_visible="new,accepted,refused"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="price"/> <field name="validity"/> <field name="date_deadline" readonly="1"/>
+            </group>
+            <group>
+              <field name="partner_id"/>
+              <field name="property_id" options="{'no_create_edit': True, 'no_open': True}"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- SEARCH -->
+  <record id="estate_property_offer_view_search" model="ir.ui.view">
+    <field name="name">estate.property.offer.view.search</field>
+    <field name="model">estate.property.offer</field>
+    <field name="arch" type="xml">
+      <search string="Search Offers">
+        <field name="partner_id"/> <field name="property_id"/>
+        <filter name="flt_new" string="New" domain="[('status','=','new')]"/>
+        <filter name="flt_accepted" string="Accepted" domain="[('status','=','accepted')]"/>
+        <filter name="flt_refused" string="Refused" domain="[('status','=','refused')]"/>
+        <group expand="0" string="Group By">
+          <filter name="grp_property" string="Property" context="{'group_by':'property_id'}"/>
+          <filter name="grp_deadline_month" string="Deadline Month" context="{'group_by':'date_deadline:month'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="estate_property_offer_action" model="ir.actions.act_window">
+    <field name="name">Property Offers</field>
+    <field name="res_model">estate.property.offer</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+</odoo>

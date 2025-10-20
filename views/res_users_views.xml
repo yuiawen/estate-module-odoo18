@@ -1,0 +1,29 @@
+<odoo>
+  <!-- ===================== FORM VIEW ===================== -->
+  <record id="view_users_form_inherit_estate" model="ir.ui.view">
+    <field name="name">res.users.form.inherit.estate</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="arch" type="xml">
+      <!-- selipkan tab baru di dalam notebook bawaan Users -->
+      <xpath expr="//notebook" position="inside">
+        <page string="Properties">
+          <field name="property_ids" readonly="1">
+            <list string="Properties">
+              <field name="name"/>
+              <field name="expected_price"/>
+              <field name="state"/>
+            </list>
+            <form string="Property">
+              <group>
+                <field name="name"/>
+                <field name="expected_price"/>
+                <field name="state"/>
+              </group>
+            </form>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>
